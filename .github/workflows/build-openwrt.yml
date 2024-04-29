@@ -26,9 +26,8 @@ jobs:
 
     - name: Clone source code
       run: |
-        git clone https://github.com/openwrt/openwrt.git && cd openwrt
-        git checkout $(git branch -a | tail -n 1 | awk -F'/' '{print $NF}') && cd ..
-        cp -r files openwrt && chmod 755 -R openwrt/files && cat feeds.buildinfo >>openwrt/feeds.conf.default 
+        git clone https://github.com/openwrt/openwrt.git && cp -r files openwrt && chmod 755 -R openwrt/files && cat feeds.buildinfo >>openwrt/feeds.conf.default
+        cat openwrt/feeds.conf.default
 
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a
