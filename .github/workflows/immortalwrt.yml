@@ -42,6 +42,7 @@ jobs:
           exit 1
         fi
         DEVICE_NAME=$(echo $target_device | awk -F "DEVICE_" '{print $2}')
+        sed -i 's/disabled=.*/disabled=0\n                        set wireless.${name}.country=US/' immortalwrt/package/network/config/wifi-scripts/files/lib/wifi/mac80211.sh
         cat <<EOF >immortalwrt/.config
         CONFIG_TARGET_$(echo $target_device | awk -F "_" '{print $2}')=y
         CONFIG_TARGET_$(echo $target_device | awk -F "_" '{print $2}')_$(echo $target_device | awk -F "_" '{print $3}')=y
